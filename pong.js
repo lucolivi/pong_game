@@ -54,6 +54,13 @@ function moveComputerPaddle() {
     } else {
         computerPaddleY -= 5;
     }
+
+    // Boundary check for computerPaddleY
+    if (computerPaddleY < 0) {
+        computerPaddleY = 0;
+    } else if (computerPaddleY + paddleHeight > canvas.height) {
+        computerPaddleY = canvas.height - paddleHeight;
+    }
 }
 
 function update() {
@@ -84,5 +91,12 @@ document.addEventListener('keydown', function(event) {
         case 40: // Down arrow
             playerPaddleY += 20;
             break;
+    }
+
+    // Boundary check for playerPaddleY
+    if (playerPaddleY < 0) {
+        playerPaddleY = 0;
+    } else if (playerPaddleY + paddleHeight > canvas.height) {
+        playerPaddleY = canvas.height - paddleHeight;
     }
 });
