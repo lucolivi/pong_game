@@ -12,6 +12,9 @@ let ballY = canvas.height / 2;
 let ballSpeedX = 5;
 let ballSpeedY = 5;
 
+let playerScore = 0; // P14da
+let computerScore = 0; // P14da
+
 function drawRect(x, y, width, height, color) {
     context.fillStyle = color;
     context.fillRect(x, y, width, height);
@@ -41,10 +44,12 @@ function moveBall() {
 
     if (ballX + ballRadius > canvas.width) {
         ballSpeedX = -ballSpeedX;
+        playerScore++; // Pf3ce
     }
 
     if (ballX - ballRadius < 0) {
         ballSpeedX = -ballSpeedX;
+        computerScore++; // Pf3ce
     }
 }
 
@@ -63,6 +68,12 @@ function moveComputerPaddle() {
     }
 }
 
+function drawScore() { // Pf102
+    context.font = '24px "Press Start 2P"'; // Pf102
+    context.fillStyle = '#FFF'; // Pf102
+    context.fillText(`Player: ${playerScore} | Computer: ${computerScore}`, canvas.width / 2 - 100, 50); // Pf102
+}
+
 function update() {
     moveBall();
     moveComputerPaddle();
@@ -74,6 +85,7 @@ function render() {
     drawRect(0, playerPaddleY, paddleWidth, paddleHeight, '#FFF');
     drawRect(canvas.width - paddleWidth, computerPaddleY, paddleWidth, paddleHeight, '#FFF');
     drawCircle(ballX, ballY, ballRadius, '#FFF');
+    drawScore(); // P7c73
 }
 
 function gameLoop() {
